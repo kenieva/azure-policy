@@ -1,0 +1,21 @@
+name: manage-azure-policy-c02007f5
+on:
+  push:
+    paths:
+      - 'policies/nehakulkarni-modifytest_027b1b30-7b65-46f3-a319-ccc6a8497604/**'
+      - .github/workflows/manage-azure-policy-c02007f5.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_c02007f5}}
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          policies/nehakulkarni-modifytest_027b1b30-7b65-46f3-a319-ccc6a8497604/**
